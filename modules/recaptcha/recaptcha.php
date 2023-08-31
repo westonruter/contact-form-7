@@ -86,7 +86,7 @@ function wpcf7_recaptcha_enqueue_scripts() {
 			$assets['dependencies'],
 			array(
 				'google-recaptcha',
-				'wp-polyfill', // @todo Why polyfill?
+				'wp-polyfill', // @todo Why polyfill? Not needed anymore? Alternatively, consider wp_get_script_polyfill().
 			)
 		),
 		$assets['version'],

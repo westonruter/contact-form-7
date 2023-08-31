@@ -74,7 +74,7 @@ function wpcf7_stripe_enqueue_scripts() {
 		array_merge(
 			$assets['dependencies'],
 			array(
-				'wp-polyfill',
+				'wp-polyfill', // @todo May not be needed? Alternatively, consider wp_get_script_polyfill().
 				'contact-form-7',
 				'stripe',
 			)
