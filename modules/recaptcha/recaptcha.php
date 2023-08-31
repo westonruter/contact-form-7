@@ -21,6 +21,7 @@ function wpcf7_recaptcha_register_service() {
 	);
 }
 
+// @todo Add resource hints per https://developers.google.com/recaptcha/docs/loading#using_resource_hints
 
 add_action(
 	'wp_enqueue_scripts',
@@ -64,6 +65,7 @@ function wpcf7_recaptcha_enqueue_scripts() {
 		'3.0',
 		true
 	);
+	wp_script_add_data( 'google-recaptcha', 'strategy', 'async' );
 
 	$assets = array();
 	$asset_file = wpcf7_plugin_path( 'modules/recaptcha/index.asset.php' );
@@ -84,12 +86,13 @@ function wpcf7_recaptcha_enqueue_scripts() {
 			$assets['dependencies'],
 			array(
 				'google-recaptcha',
-				'wp-polyfill',
+				'wp-polyfill', // @todo Why polyfill?
 			)
 		),
 		$assets['version'],
 		true
 	);
+	wp_script_add_data( 'wpcf7-recaptcha', 'strategy', 'async' );
 
 	wp_enqueue_script( 'wpcf7-recaptcha' );
 
