@@ -29,11 +29,11 @@ function wpcf7_control_init() {
 
 
 /**
- * Registers main scripts.
+ * Registers main scripts and styles.
  */
 add_action(
-	'wp_default_scripts',
-	static function ( WP_Scripts $scripts ) {
+	'wp_enqueue_scripts',
+	static function () {
 		$assets = array();
 		$asset_file = wpcf7_plugin_path( 'includes/js/index.asset.php' );
 
@@ -46,7 +46,7 @@ add_action(
 			'version' => WPCF7_VERSION,
 		) );
 
-		$scripts->add(
+		wp_register_script(
 			'contact-form-7',
 			wpcf7_plugin_url( 'includes/js/index.js' ),
 			array_merge(
@@ -54,28 +54,18 @@ add_action(
 				array( 'swv' )
 			),
 			$assets['version'],
-			1 // in_footer
+			true
 		);
 
-		$scripts->add(
+		wp_register_script(
 			'contact-form-7-html5-fallback',
 			wpcf7_plugin_url( 'includes/js/html5-fallback.js' ),
 			array( 'jquery-ui-datepicker' ),
 			WPCF7_VERSION,
-			1 // in_footer
+			true
 		);
-	},
-	10, 1
-);
 
-
-/**
- * Registers main styles.
- */
-add_action(
-	'wp_default_styles',
-	static function ( WP_Styles $styles ) {
-		$styles->add(
+		wp_register_style(
 			'contact-form-7',
 			wpcf7_plugin_url( 'includes/css/styles.css' ),
 			array(),
@@ -83,7 +73,7 @@ add_action(
 			'all'
 		);
 
-		$styles->add(
+		wp_register_style(
 			'contact-form-7-rtl',
 			wpcf7_plugin_url( 'includes/css/styles-rtl.css' ),
 			array( 'contact-form-7' ),
@@ -91,7 +81,7 @@ add_action(
 			'all'
 		);
 
-		$styles->add(
+		wp_register_style(
 			'jquery-ui-smoothness',
 			wpcf7_plugin_url(
 				'includes/js/jquery-ui/themes/smoothness/jquery-ui.min.css'
@@ -101,7 +91,7 @@ add_action(
 			'screen'
 		);
 	},
-	10, 1
+	10, 0
 );
 
 
